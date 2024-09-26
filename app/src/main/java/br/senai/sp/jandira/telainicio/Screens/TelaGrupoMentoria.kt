@@ -9,7 +9,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialogDefaults.shape
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Label
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.telainicio.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
     Column(
@@ -148,7 +153,7 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                             )
                         }
                         .height(120.dp)
-                        .background(Color.White)
+                        .background(Color.White, shape = RoundedCornerShape(10.dp))
                         .border(
                             1.dp,
                             color = Color(0xFFD9D9D9),
@@ -177,6 +182,7 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
             )
             Spacer(modifier = Modifier.width(8.dp))
             Text("Mentor do grupo", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+
         }
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -190,11 +196,39 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
         }
         Column(
             modifier = Modifier
-                .background(Color.Red)
-                .height(60.dp).width(400.dp)
+                .drawBehind {
+                    // Configurações da sombra
+                    val shadowColor = Color(0xFFD9D9D9) // Cor da sombra sólida
+                    val offsetX = 5f // Deslocamento horizontal da sombra
+                    val offsetY = 10f // Deslocamento vertical da sombra
+                    val cornerRadius = 30f // Raio dos cantos arredondados
 
-        ) {
+                    // Desenha a sombra sólida com cantos arredondados
+                    drawRoundRect(
+                        color = shadowColor.copy(alpha = 0.8f), // Define a cor e transparência da sombra
+                        topLeft = Offset(-offsetX, offsetY), // Define o deslocamento da sombra (lateral e para baixo)
+                        size = Size(
+                            size.width + offsetX * 2, // Aumenta a largura da sombra
+                            size.height + offsetY // Aumenta a altura da sombra
+                        ), // Tamanho da sombra ajustado
+                        cornerRadius = CornerRadius(
+                            cornerRadius,
+                            cornerRadius
+                        ) // Define os cantos arredondados
+                    )
+                }
+                .height(60.dp) // Mantém a altura desejada
+                .width(400.dp) // Mantém a largura desejada
+                .background(Color.White, shape = RoundedCornerShape(10.dp)) // Aplica o fundo com bordas arredondadas
+                .border(
+                    1.dp,
+                    color = Color(0xFFD9D9D9),
+                    shape = RoundedCornerShape(10.dp) // Certifique-se de que a borda também tenha os mesmos cantos arredondados
+                )
+        ){
+
             Row {
+
                 Box(modifier = Modifier.size(60.dp)){
                     Image(
                         painter = painterResource(id = R.drawable.usuario),
@@ -202,58 +236,246 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                         modifier = Modifier.size(60.dp).padding(start = 15.dp).width(20.dp)
                     )
                 }
+                Spacer(modifier = Modifier.width(10.dp))
                 Box(){
-                    Text(text = "Nome do mentor")
-                    Text(text = ("20 pessoas"))
+                    Text(
+                        text = "Nome do mentor",
+                        modifier = Modifier
+                            .padding(start = 10.dp, top = 10.dp),
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = ("20 pessoas"),
+                        modifier = Modifier
+                            .padding(top = 24.dp, start = 10.dp),
+                        fontSize = 14.sp
+                    )
+//                    Image(painter = painterResource(id = R.drawable.traco),
+//                        contentDescription = "separador",
+//                        modifier = Modifier.height(10.dp)
+//                        )
                 }
-                Box(){
 
+                Box(
+
+
+                    modifier = Modifier
+                        .size(160.dp)
+                        .padding(start = 20.dp)
+                ) {
+
+
+                    Image(
+                        painter = painterResource(id = R.drawable.linha),
+                        contentDescription = "linha",
+                        modifier = Modifier.height(60.dp).width(80.dp).padding(start = 2.dp, top = 10.dp, bottom = 10.dp ),
+                        )
+                    Text(
+                        "4.5",
+                        modifier = Modifier
+                            .padding(top = 20.dp)
+                            .align(Alignment.TopStart),
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        "(254 avaliações)",
+                        modifier = Modifier
+                            .padding(top = 30.dp, start = 50.dp)
+                            .align(Alignment.TopStart),
+                        fontSize = 10.sp
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.estrelas),
+                        contentDescription = "teste",
+                        modifier = Modifier
+                            .size(90.dp) // Ajuste o tamanho conforme necessário
+                            .align(Alignment.Center)
+                            .padding(bottom = 20.dp, start = 30.dp) // Tente alinhar ao centro para ver se é exibido corretamente
+                    )
                 }
+
+
             }
         }
         Spacer(modifier = Modifier.height(30.dp))
 
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly // Espaça as colunas igualmente
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(25.dp) // Ajuste o valor para aumentar ou diminuir o espaço
         ) {
-            // Primeira Column
             Box(
                 modifier = Modifier
-                    .background(Color.Red)
+                    .background(Color(0xffFFF28A), shape = RoundedCornerShape(10.dp))
                     .height(46.dp)
-                    .width(100.dp),
-                contentAlignment = Alignment.Center // Centraliza o conteúdo no Box
+                    .width(100.dp) .drawBehind {
+                        // Configurações da sombra
+                        val shadowColor = Color(0xffFFF28A) // Cor da sombra sólida
+                        val offsetX = 5f // Deslocamento horizontal da sombra
+                        val offsetY = 10f // Deslocamento vertical da sombra
+                        val cornerRadius = 30f // Raio dos cantos arredondados
+
+                        // Desenha a sombra sólida com cantos arredondados
+                        drawRoundRect(
+                            color = shadowColor.copy(alpha = 0.8f), // Define a cor e transparência da sombra
+                            topLeft = Offset(-offsetX, offsetY), // Define o deslocamento da sombra (lateral e para baixo)
+                            size = Size(
+                                size.width + offsetX * 2, // Aumenta a largura da sombra
+                                size.height + offsetY // Aumenta a altura da sombra
+                            ), // Tamanho da sombra ajustado
+                            cornerRadius = CornerRadius(
+                                cornerRadius,
+                                cornerRadius
+                            ) // Define os cantos arredondados
+                        )
+                    }
+                    .height(60.dp) // Mantém a altura desejada
+                    .width(400.dp) // Mantém a largura desejada
+                    .background(Color(0xffFFF28A), shape = RoundedCornerShape(10.dp)) // Aplica o fundo com bordas arredondadas
+                    .border(
+                        1.dp,
+                        color = Color(0xffFFF28A),
+                        shape = RoundedCornerShape(10.dp) // Certifique-se de que a borda também tenha os mesmos cantos arredondados
+
+                        ),
+                contentAlignment = Alignment.Center
+
+
             ) {
-                Text(text = "Atividades")
+                Text(text = "MEMBROS",  fontWeight = FontWeight.ExtraBold)
             }
 
-            // Segunda Column
             Box(
                 modifier = Modifier
-                    .background(Color.Green)
+                    .background(Color(0xFFFEE101), shape = RoundedCornerShape(10.dp))
                     .height(46.dp)
-                    .width(100.dp),
-                contentAlignment = Alignment.Center // Centraliza o conteúdo no Box
+                    .width(100.dp)
+                    .drawBehind {
+                        // Configurações da sombra
+                        val shadowColor = Color(0xFFFEE101) // Cor da sombra sólida
+                        val offsetX = 5f // Deslocamento horizontal da sombra
+                        val offsetY = 10f // Deslocamento vertical da sombra
+                        val cornerRadius = 30f // Raio dos cantos arredondados
+
+                        // Desenha a sombra sólida com cantos arredondados
+                        drawRoundRect(
+                            color = shadowColor.copy(alpha = 0.8f), // Define a cor e transparência da sombra
+                            topLeft = Offset(-offsetX, offsetY), // Define o deslocamento da sombra (lateral e para baixo)
+                            size = Size(
+                                size.width + offsetX * 2, // Aumenta a largura da sombra
+                                size.height + offsetY // Aumenta a altura da sombra
+                            ), // Tamanho da sombra ajustado
+                            cornerRadius = CornerRadius(
+                                cornerRadius,
+                                cornerRadius
+                            ) // Define os cantos arredondados
+                        )
+                    }
+                    .height(60.dp) // Mantém a altura desejada
+                    .width(400.dp) // Mantém a largura desejada
+                    .background(Color(0xFFFEE101), shape = RoundedCornerShape(10.dp)) // Aplica o fundo com bordas arredondadas
+                    .border(
+                        1.dp,
+                        color = Color(0xFFFEE101),
+                        shape = RoundedCornerShape(10.dp) // Certifique-se de que a borda também tenha os mesmos cantos arredondados
+
+                    ),
+
+                contentAlignment = Alignment.Center
             ) {
-                Text(text = "Atividades")
+                Text(text = "ATIVIDADES", fontWeight = FontWeight.ExtraBold)
             }
 
-            // Terceira Column
             Box(
                 modifier = Modifier
-                    .background(Color.Blue)
+                    .background(Color(0xffFFF28A), shape = RoundedCornerShape(10.dp))
                     .height(46.dp)
-                    .width(100.dp),
-                contentAlignment = Alignment.Center // Centraliza o conteúdo no Box
+                    .width(100.dp) .drawBehind {
+                        // Configurações da sombra
+                        val shadowColor = Color(0xFFFFF37D) // Cor da sombra sólida
+                        val offsetX = 5f // Deslocamento horizontal da sombra
+                        val offsetY = 10f // Deslocamento vertical da sombra
+                        val cornerRadius = 30f // Raio dos cantos arredondados
+
+                        // Desenha a sombra sólida com cantos arredondados
+                        drawRoundRect(
+                            color = shadowColor.copy(alpha = 0.8f), // Define a cor e transparência da sombra
+                            topLeft = Offset(-offsetX, offsetY), // Define o deslocamento da sombra (lateral e para baixo)
+                            size = Size(
+                                size.width + offsetX * 2, // Aumenta a largura da sombra
+                                size.height + offsetY // Aumenta a altura da sombra
+                            ), // Tamanho da sombra ajustado
+                            cornerRadius = CornerRadius(
+                                cornerRadius,
+                                cornerRadius
+                            ) // Define os cantos arredondados
+                        )
+                    }
+                    .height(60.dp) // Mantém a altura desejada
+                    .width(400.dp) // Mantém a largura desejada
+                    .background(Color(0xffFFF28A), shape = RoundedCornerShape(10.dp)) // Aplica o fundo com bordas arredondadas
+                    .border(
+                        1.dp,
+                        color = Color(0xffFFF28A),
+                        shape = RoundedCornerShape(10.dp) // Certifique-se de que a borda também tenha os mesmos cantos arredondados
+
+                    ),
+                contentAlignment = Alignment.Center
+
+
             ) {
-                Text(text = "Atividades")
+                Text(text = "OUTRA",  fontWeight = FontWeight.ExtraBold)
             }
         }
 
+        Spacer(modifier = Modifier.height(20.dp))
 
+        Box(modifier = Modifier.background(Color(0xFFFEE101)).height(300.dp).width(400.dp)){
+            Column() {
+                Row(
+                    modifier = Modifier
+                        .background(Color(0xFFF00BFFF))
+                        .height(60.dp)
+                        .width(400.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    TextField(
+                        value = "",
+                        onValueChange = {  }, // Atualiza o estado quando o texto muda
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp),
+                        placeholder = { Text("Pesquise...") },
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = Color.White
+                        )
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(40.dp))
+
+                Row(modifier = Modifier
+                    .background(Color(0xFFF00BFFF))
+                    .height(150.dp)
+                    .width(400.dp).padding(top = 15.dp),
+                    horizontalArrangement = Arrangement.Center) {
+                    Box(modifier = Modifier
+                        .background(Color(0xFFF4682B4))
+                        .height(120.dp)
+                        .width(120.dp)  ){
+
+                    }
+                    Spacer(modifier = Modifier.width(30.dp))
+                    Box(modifier = Modifier
+                        .background(Color(0xFFF4682B4))
+                        .height(120.dp)
+                        .width(120.dp)){
+
+                    }
+                }
+            }
+        }
     }
 
 
