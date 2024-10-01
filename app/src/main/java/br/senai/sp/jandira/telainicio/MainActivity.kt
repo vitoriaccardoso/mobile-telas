@@ -14,7 +14,7 @@ import br.senai.sp.jandira.telainicio.ui.theme.TelaInicioTheme
 import br.senai.sp.jandira.telainicio.Screens.TelaInicio
 import br.senai.sp.jandira.telainicio.Screens.TelaInicio2
 import br.senai.sp.jandira.telainicio.Screens.TelaCadastro1
-import br.senai.sp.jandira.telainicio.Screens.TelaCadastroProf
+import br.senai.sp.jandira.telainicio.Screens.TelaGrupoMentoria
 import br.senai.sp.jandira.telainicio.Screens.TelaLogin
 
 
@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
                 // cadastroCat()
                 val controleDeNavegacao = rememberNavController()
 
-                NavHost(navController = controleDeNavegacao, startDestination = "inicio"){
+                NavHost(navController = controleDeNavegacao, startDestination = "grupoMentoria"){
                     composable(route = "inicio"){
                         TelaInicio(controleDeNavegacao)
                     }
@@ -47,8 +47,8 @@ class MainActivity : ComponentActivity() {
                         // Passando o backStackEntry para a TelaCadastro1
                         TelaCadastro1(controleDeNavegacao, backStackEntry)
                     }
-                    composable(route = "cadastroprof"){
-                        TelaCadastroProf(controleDeNavegacao)
+                    composable(route = "grupoMentoria"){
+                        TelaGrupoMentoria(controleDeNavegacao)
                     }
                 }
             }
