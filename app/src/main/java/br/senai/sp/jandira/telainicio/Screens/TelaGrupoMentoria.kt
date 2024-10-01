@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -16,6 +17,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -42,6 +47,14 @@ import br.senai.sp.jandira.telainicio.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
+
+    var atividades = remember { mutableStateOf(false) }
+    var membros = remember { mutableStateOf(false) }
+    var duvidas = remember { mutableStateOf(false) }
+    var selectedBox by remember { mutableStateOf(null) }
+
+
+
 
     Column (
         modifier = Modifier
@@ -151,7 +164,10 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                 // Desenha a sombra sólida com cantos arredondados
                                 drawRoundRect(
                                     color = shadowColor.copy(alpha = 0.8f), // Define a cor e transparência da sombra
-                                    topLeft = Offset(0f, offsetY), // Define o deslocamento da sombra
+                                    topLeft = Offset(
+                                        0f,
+                                        offsetY
+                                    ), // Define o deslocamento da sombra
                                     size = Size(
                                         size.width,
                                         size.height
@@ -172,8 +188,9 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
 
                     ) {
                         Text(
-                            "        wsdsd sds dewfefnj fnierf uhfhef efeufhuefe \nfheufh  sjds hsdhsjd \njhjfsjf sfhsjhfj h jshf jsh djs\n jh sh jhshd jshdjsh d ",
+                            "wsdsd sds dewfefnj fnierf uhfhef efeufhuefe \nfheufh  sjds hsdhsjd \njhjfsjf sfhsjhfj h jshf jsh djs\n jh sh jhshd jshdjsh d ",
                             fontSize = 16.sp,
+                            modifier = Modifier.padding(start = 10.dp, top = 10.dp)
                         )
                     }
 
@@ -216,7 +233,10 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                         // Desenha a sombra sólida com cantos arredondados
                         drawRoundRect(
                             color = shadowColor.copy(alpha = 0.8f), // Define a cor e transparência da sombra
-                            topLeft = Offset(-offsetX, offsetY), // Define o deslocamento da sombra (lateral e para baixo)
+                            topLeft = Offset(
+                                -offsetX,
+                                offsetY
+                            ), // Define o deslocamento da sombra (lateral e para baixo)
                             size = Size(
                                 size.width + offsetX * 2, // Aumenta a largura da sombra
                                 size.height + offsetY // Aumenta a altura da sombra
@@ -229,7 +249,10 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                     }
                     .height(60.dp) // Mantém a altura desejada
                     .width(400.dp) // Mantém a largura desejada
-                    .background(Color.White, shape = RoundedCornerShape(10.dp)) // Aplica o fundo com bordas arredondadas
+                    .background(
+                        Color.White,
+                        shape = RoundedCornerShape(10.dp)
+                    ) // Aplica o fundo com bordas arredondadas
                     .border(
                         1.dp,
                         color = Color(0xFFD9D9D9),
@@ -243,7 +266,10 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                         Image(
                             painter = painterResource(id = R.drawable.usuario),
                             contentDescription = "usuario",
-                            modifier = Modifier.size(60.dp).padding(start = 15.dp).width(20.dp)
+                            modifier = Modifier
+                                .size(60.dp)
+                                .padding(start = 15.dp)
+                                .width(20.dp)
                         )
                     }
                     Spacer(modifier = Modifier.width(10.dp))
@@ -261,10 +287,7 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                 .padding(top = 24.dp, start = 10.dp),
                             fontSize = 14.sp
                         )
-//                    Image(painter = painterResource(id = R.drawable.traco),
-//                        contentDescription = "separador",
-//                        modifier = Modifier.height(10.dp)
-//                        )
+
                     }
 
                     Box(
@@ -279,7 +302,10 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                         Image(
                             painter = painterResource(id = R.drawable.linha),
                             contentDescription = "linha",
-                            modifier = Modifier.height(60.dp).width(80.dp).padding(start = 2.dp, top = 10.dp, bottom = 10.dp ),
+                            modifier = Modifier
+                                .height(60.dp)
+                                .width(80.dp)
+                                .padding(start = 2.dp, top = 10.dp, bottom = 10.dp),
                         )
                         Text(
                             "4.5",
@@ -317,11 +343,13 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
             ) {
                 Box(
                     modifier = Modifier
-                        .background(Color(0xffFFF28A), shape = RoundedCornerShape(10.dp))
+//                        .background(Color(0xffFFF28A))
                         .height(46.dp)
-                        .width(100.dp) .drawBehind {
+                        .background(if (selectedBox == "membros") Color(0xffFFF28A) else Color(0xfffE9CE03), shape = RoundedCornerShape(10.dp))
+                        .width(100.dp)
+                        .drawBehind {
                             // Configurações da sombra
-                            val shadowColor = Color(0xffFFF28A) // Cor da sombra sólida
+                            val shadowColor = Color(0xfFFF28A) // Cor da sombra sólida
                             val offsetX = 5f // Deslocamento horizontal da sombra
                             val offsetY = 10f // Deslocamento vertical da sombra
                             val cornerRadius = 30f // Raio dos cantos arredondados
@@ -329,7 +357,10 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                             // Desenha a sombra sólida com cantos arredondados
                             drawRoundRect(
                                 color = shadowColor.copy(alpha = 0.8f), // Define a cor e transparência da sombra
-                                topLeft = Offset(-offsetX, offsetY), // Define o deslocamento da sombra (lateral e para baixo)
+                                topLeft = Offset(
+                                    -offsetX,
+                                    offsetY
+                                ), // Define o deslocamento da sombra (lateral e para baixo)
                                 size = Size(
                                     size.width + offsetX * 2, // Aumenta a largura da sombra
                                     size.height + offsetY // Aumenta a altura da sombra
@@ -342,13 +373,21 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                         }
                         .height(60.dp) // Mantém a altura desejada
                         .width(400.dp) // Mantém a largura desejada
-                        .background(Color(0xffFFF28A), shape = RoundedCornerShape(10.dp)) // Aplica o fundo com bordas arredondadas
+                        .background(
+                            Color(0xffFFF28A),
+                            shape = RoundedCornerShape(10.dp)
+                        ) // Aplica o fundo com bordas arredondadas
                         .border(
                             1.dp,
                             color = Color(0xffFFF28A),
                             shape = RoundedCornerShape(10.dp) // Certifique-se de que a borda também tenha os mesmos cantos arredondados
-
-                        ),
+                        )
+                        .clickable {
+                            atividades.value = false
+                            duvidas.value = false
+                            membros.value = true
+                            selectedBox = null
+                        },
                     contentAlignment = Alignment.Center
 
 
@@ -358,12 +397,13 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
 
                 Box(
                     modifier = Modifier
-                        .background(Color(0xFFFEE101), shape = RoundedCornerShape(10.dp))
+//                        .background(Color(0xFFFEE101))
+                        .background(if (selectedBox == "Atividades") Color(0xffFFF28A) else Color(0xfffE9CE03), shape = RoundedCornerShape(10.dp))
                         .height(46.dp)
                         .width(100.dp)
                         .drawBehind {
                             // Configurações da sombra
-                            val shadowColor = Color(0xFFFEE101) // Cor da sombra sólida
+                            val shadowColor = Color(0xfffE9CE03) // Cor da sombra sólida
                             val offsetX = 5f // Deslocamento horizontal da sombra
                             val offsetY = 10f // Deslocamento vertical da sombra
                             val cornerRadius = 30f // Raio dos cantos arredondados
@@ -371,7 +411,10 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                             // Desenha a sombra sólida com cantos arredondados
                             drawRoundRect(
                                 color = shadowColor.copy(alpha = 0.8f), // Define a cor e transparência da sombra
-                                topLeft = Offset(-offsetX, offsetY), // Define o deslocamento da sombra (lateral e para baixo)
+                                topLeft = Offset(
+                                    -offsetX,
+                                    offsetY
+                                ), // Define o deslocamento da sombra (lateral e para baixo)
                                 size = Size(
                                     size.width + offsetX * 2, // Aumenta a largura da sombra
                                     size.height + offsetY // Aumenta a altura da sombra
@@ -384,13 +427,21 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                         }
                         .height(60.dp) // Mantém a altura desejada
                         .width(400.dp) // Mantém a largura desejada
-                        .background(Color(0xFFFEE101), shape = RoundedCornerShape(10.dp)) // Aplica o fundo com bordas arredondadas
+                        .background(
+                            Color(0xFFFEE101),
+                            shape = RoundedCornerShape(10.dp)
+                        ) // Aplica o fundo com bordas arredondadas
                         .border(
                             1.dp,
                             color = Color(0xFFFEE101),
                             shape = RoundedCornerShape(10.dp) // Certifique-se de que a borda também tenha os mesmos cantos arredondados
-
-                        ),
+                        )
+                        .clickable {
+                            atividades.value = true
+                            duvidas.value = false
+                            membros.value = false
+                            selectedBox = null
+                        },
 
                     contentAlignment = Alignment.Center
                 ) {
@@ -399,11 +450,13 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
 
                 Box(
                     modifier = Modifier
-                        .background(Color(0xffFFF28A), shape = RoundedCornerShape(10.dp))
+//                        .background(Color(0xffFFF28A), shape = RoundedCornerShape(10.dp))
+                        .background(if (selectedBox == "Outra") Color(0xffFFF28A) else Color(0xfffE9CE03), shape = RoundedCornerShape(10.dp))
                         .height(46.dp)
-                        .width(100.dp) .drawBehind {
+                        .width(100.dp)
+                        .drawBehind {
                             // Configurações da sombra
-                            val shadowColor = Color(0xFFFFF37D) // Cor da sombra sólida
+                            val shadowColor = Color(0xfFFF28A) // Cor da sombra sólida
                             val offsetX = 5f // Deslocamento horizontal da sombra
                             val offsetY = 10f // Deslocamento vertical da sombra
                             val cornerRadius = 30f // Raio dos cantos arredondados
@@ -411,7 +464,10 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                             // Desenha a sombra sólida com cantos arredondados
                             drawRoundRect(
                                 color = shadowColor.copy(alpha = 0.8f), // Define a cor e transparência da sombra
-                                topLeft = Offset(-offsetX, offsetY), // Define o deslocamento da sombra (lateral e para baixo)
+                                topLeft = Offset(
+                                    -offsetX,
+                                    offsetY
+                                ), // Define o deslocamento da sombra (lateral e para baixo)
                                 size = Size(
                                     size.width + offsetX * 2, // Aumenta a largura da sombra
                                     size.height + offsetY // Aumenta a altura da sombra
@@ -424,18 +480,27 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                         }
                         .height(60.dp) // Mantém a altura desejada
                         .width(400.dp) // Mantém a largura desejada
-                        .background(Color(0xffFFF28A), shape = RoundedCornerShape(10.dp)) // Aplica o fundo com bordas arredondadas
+                        .background(
+                            Color(0xffFFF28A),
+                            shape = RoundedCornerShape(10.dp)
+                        ) // Aplica o fundo com bordas arredondadas
                         .border(
                             1.dp,
                             color = Color(0xffFFF28A),
                             shape = RoundedCornerShape(10.dp) // Certifique-se de que a borda também tenha os mesmos cantos arredondados
+                        )
+                        .clickable {
+                            atividades.value = false
+                            duvidas.value = true
+                            membros.value = false
+                            selectedBox = null
 
-                        ),
+                        },
                     contentAlignment = Alignment.Center
 
 
                 ) {
-                    Text(text = "OUTRA",  fontWeight = FontWeight.ExtraBold)
+                    Text(text = "DUVIDA",  fontWeight = FontWeight.ExtraBold)
                 }
             }
 
@@ -448,6 +513,8 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                     .fillMaxWidth()
                     .border(BorderStroke(1.dp, Color(0xffD9D9D9)))
             ) {
+                if(atividades.value == true){
+
                     Row(
                         modifier = Modifier
                             .background(Color(0xFFFFFFFF))
@@ -689,6 +756,635 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                             }
                         }
                     }
+                } else if (membros.value == true){
+
+                    Row (
+                        modifier = Modifier
+                            .background(Color.White)
+                            .height(60.dp)  // Define a altura mínima
+                            .fillMaxWidth()
+                            .border(BorderStroke(1.dp, Color(0xffD9D9D9)))
+
+                    ){
+                        Box{
+                            Image(
+                                painter = painterResource(id = R.drawable.usuario),
+                                contentDescription = "usuario",
+                                modifier = Modifier
+                                    .size(60.dp)
+                                    .padding(start = 15.dp)
+
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(20.dp))
+                        Box(modifier = Modifier
+                            .background(Color.White)
+                            .height(80.dp)
+                            .width(165.dp)
+                        ){
+                            Text(
+                                text = "Matheus Noronha",
+                                modifier = Modifier
+                                    .padding(start = 4.dp, top = 5.dp),
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = ("Estudando: \n" +
+                                        "Matemática e português"),
+                                modifier = Modifier
+                                    .padding(top = 28.dp, start = 6.dp),
+                                fontSize = 11.sp
+                            )
+
+
+                        }
+                        Box(
+                            modifier = Modifier
+                                .background(color = Color.White)
+                                .height(60.dp)
+                                .width(165.dp)
+                        )
+
+                        {
+
+                            Text(
+                                text = (
+                                        "Sub-assunto: "
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 24.dp),
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            Text(
+                                text = ("Soma"),
+                                modifier = Modifier
+                                    .padding(top = 24.dp, start = 60.dp),
+                                fontSize = 10.sp
+                            )
+
+                            Text(
+                                text = (
+                                        "Série:"
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 34.dp),
+                                fontSize = 10.sp, fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                            )
+
+
+                        }
+                        Box{
+                            Image(
+                                painter = painterResource(id = R.drawable.usuario),
+                                contentDescription = "usuario",
+                                modifier = Modifier
+                                    .size(60.dp)
+                                    .padding(start = 15.dp)
+
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(20.dp))
+                        Box(modifier = Modifier
+                            .background(Color.White)
+                            .height(80.dp)
+                            .width(165.dp)
+                        ){
+                            Text(
+                                text = "Matheus Noronha",
+                                modifier = Modifier
+                                    .padding(start = 4.dp, top = 5.dp),
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = ("Estudando: \n" +
+                                        "Matemática e português"),
+                                modifier = Modifier
+                                    .padding(top = 28.dp, start = 6.dp),
+                                fontSize = 11.sp
+                            )
+
+
+                        }
+                        Box(
+                            modifier = Modifier
+                                .background(color = Color.White)
+                                .height(60.dp)
+                                .width(165.dp)
+                        )
+
+                        {
+
+                            Text(
+                                text = (
+                                        "Sub-assunto: "
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 24.dp),
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            Text(
+                                text = ("Soma"),
+                                modifier = Modifier
+                                    .padding(top = 24.dp, start = 60.dp),
+                                fontSize = 10.sp
+                            )
+
+                            Text(
+                                text = (
+                                        "Série:"
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 34.dp),
+                                fontSize = 10.sp, fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                            )
+
+
+
+                        }
+                    }
+
+                    Row (
+                        modifier = Modifier
+                            .background(Color.White)
+                            .height(60.dp)  // Define a altura mínima
+                            .fillMaxWidth()
+                            .border(BorderStroke(1.dp, Color(0xffD9D9D9)))
+
+                    ){
+                        Box{
+                            Image(
+                                painter = painterResource(id = R.drawable.usuario),
+                                contentDescription = "usuario",
+                                modifier = Modifier
+                                    .size(60.dp)
+                                    .padding(start = 15.dp)
+
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(20.dp))
+                        Box(modifier = Modifier
+                            .background(Color.White)
+                            .height(80.dp)
+                            .width(165.dp)
+                        ){
+                            Text(
+                                text = "Matheus Noronha",
+                                modifier = Modifier
+                                    .padding(start = 4.dp, top = 5.dp),
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = ("Estudando: \n" +
+                                        "Matemática e português"),
+                                modifier = Modifier
+                                    .padding(top = 28.dp, start = 6.dp),
+                                fontSize = 11.sp
+                            )
+
+
+                        }
+                        Box(
+                            modifier = Modifier
+                                .background(color = Color.White)
+                                .height(60.dp)
+                                .width(165.dp)
+                        )
+
+                        {
+
+                            Text(
+                                text = (
+                                        "Sub-assunto: "
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 24.dp),
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            Text(
+                                text = ("Soma"),
+                                modifier = Modifier
+                                    .padding(top = 24.dp, start = 60.dp),
+                                fontSize = 10.sp
+                            )
+
+                            Text(
+                                text = (
+                                        "Série:"
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 34.dp),
+                                fontSize = 10.sp, fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                            )
+
+
+                        }
+                        Box{
+                            Image(
+                                painter = painterResource(id = R.drawable.usuario),
+                                contentDescription = "usuario",
+                                modifier = Modifier
+                                    .size(60.dp)
+                                    .padding(start = 15.dp)
+
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(20.dp))
+                        Box(modifier = Modifier
+                            .background(Color.White)
+                            .height(80.dp)
+                            .width(165.dp)
+                        ){
+                            Text(
+                                text = "Matheus Noronha",
+                                modifier = Modifier
+                                    .padding(start = 4.dp, top = 5.dp),
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = ("Estudando: \n" +
+                                        "Matemática e português"),
+                                modifier = Modifier
+                                    .padding(top = 28.dp, start = 6.dp),
+                                fontSize = 11.sp
+                            )
+
+
+                        }
+                        Box(
+                            modifier = Modifier
+                                .background(color = Color.White)
+                                .height(60.dp)
+                                .width(165.dp)
+                        )
+
+                        {
+
+                            Text(
+                                text = (
+                                        "Sub-assunto: "
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 24.dp),
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            Text(
+                                text = ("Soma"),
+                                modifier = Modifier
+                                    .padding(top = 24.dp, start = 60.dp),
+                                fontSize = 10.sp
+                            )
+
+                            Text(
+                                text = (
+                                        "Série:"
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 34.dp),
+                                fontSize = 10.sp, fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                            )
+
+
+
+                        }
+                    }
+                    Row (
+                        modifier = Modifier
+                            .background(Color.White)
+                            .height(60.dp)  // Define a altura mínima
+                            .fillMaxWidth()
+                            .border(BorderStroke(1.dp, Color(0xffD9D9D9)))
+
+                    ){
+                        Box{
+                            Image(
+                                painter = painterResource(id = R.drawable.usuario),
+                                contentDescription = "usuario",
+                                modifier = Modifier
+                                    .size(60.dp)
+                                    .padding(start = 15.dp)
+
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(20.dp))
+                        Box(modifier = Modifier
+                            .background(Color.White)
+                            .height(80.dp)
+                            .width(165.dp)
+                        ){
+                            Text(
+                                text = "Matheus Noronha",
+                                modifier = Modifier
+                                    .padding(start = 4.dp, top = 5.dp),
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = ("Estudando: \n" +
+                                        "Matemática e português"),
+                                modifier = Modifier
+                                    .padding(top = 28.dp, start = 6.dp),
+                                fontSize = 11.sp
+                            )
+
+
+                        }
+                        Box(
+                            modifier = Modifier
+                                .background(color = Color.White)
+                                .height(60.dp)
+                                .width(165.dp)
+                        )
+
+                        {
+
+                            Text(
+                                text = (
+                                        "Sub-assunto: "
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 24.dp),
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            Text(
+                                text = ("Soma"),
+                                modifier = Modifier
+                                    .padding(top = 24.dp, start = 60.dp),
+                                fontSize = 10.sp
+                            )
+
+                            Text(
+                                text = (
+                                        "Série:"
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 34.dp),
+                                fontSize = 10.sp, fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                            )
+
+
+                        }
+                        Box{
+                            Image(
+                                painter = painterResource(id = R.drawable.usuario),
+                                contentDescription = "usuario",
+                                modifier = Modifier
+                                    .size(60.dp)
+                                    .padding(start = 15.dp)
+
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(20.dp))
+                        Box(modifier = Modifier
+                            .background(Color.White)
+                            .height(80.dp)
+                            .width(165.dp)
+                        ){
+                            Text(
+                                text = "Matheus Noronha",
+                                modifier = Modifier
+                                    .padding(start = 4.dp, top = 5.dp),
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = ("Estudando: \n" +
+                                        "Matemática e português"),
+                                modifier = Modifier
+                                    .padding(top = 28.dp, start = 6.dp),
+                                fontSize = 11.sp
+                            )
+
+
+                        }
+                        Box(
+                            modifier = Modifier
+                                .background(color = Color.White)
+                                .height(60.dp)
+                                .width(165.dp)
+                        )
+
+                        {
+
+                            Text(
+                                text = (
+                                        "Sub-assunto: "
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 24.dp),
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            Text(
+                                text = ("Soma"),
+                                modifier = Modifier
+                                    .padding(top = 24.dp, start = 60.dp),
+                                fontSize = 10.sp
+                            )
+
+                            Text(
+                                text = (
+                                        "Série:"
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 34.dp),
+                                fontSize = 10.sp, fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                            )
+
+
+
+                        }
+                    }
+                    Row (
+                        modifier = Modifier
+                            .background(Color(0xffD9D9D9))
+                            .height(60.dp)  // Define a altura mínima
+                            .fillMaxWidth()
+
+
+                    ){
+                        Box{
+                            Image(
+                                painter = painterResource(id = R.drawable.usuario),
+                                contentDescription = "usuario",
+                                modifier = Modifier
+                                    .size(60.dp)
+                                    .padding(start = 15.dp)
+
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(20.dp))
+                        Box(modifier = Modifier
+                            .background(Color(0xffD9D9D9))
+                            .height(80.dp)
+                            .width(165.dp)
+                        ){
+                            Text(
+                                text = "Matheus Noronha",
+                                modifier = Modifier
+                                    .padding(start = 4.dp, top = 5.dp),
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = ("Estudando: \n" +
+                                        "Matemática e português"),
+                                modifier = Modifier
+                                    .padding(top = 28.dp, start = 6.dp),
+                                fontSize = 11.sp
+                            )
+
+
+                        }
+                        Box(
+                            modifier = Modifier
+                                .background(color = Color(0xffD9D9D9))
+                                .height(60.dp)
+                                .width(165.dp)
+                        )
+
+                        {
+
+                            Text(
+                                text = (
+                                        "Sub-assunto: "
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 24.dp),
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            Text(
+                                text = ("Soma"),
+                                modifier = Modifier
+                                    .padding(top = 24.dp, start = 60.dp),
+                                fontSize = 10.sp
+                            )
+
+                            Text(
+                                text = (
+                                        "Série:"
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 34.dp),
+                                fontSize = 10.sp, fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                            )
+
+
+                        }
+                        Box{
+                            Image(
+                                painter = painterResource(id = R.drawable.usuario),
+                                contentDescription = "usuario",
+                                modifier = Modifier
+                                    .size(60.dp)
+                                    .padding(start = 15.dp)
+
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(20.dp))
+                        Box(modifier = Modifier
+                            .background(Color.White)
+                            .height(80.dp)
+                            .width(165.dp)
+                        ){
+                            Text(
+                                text = "Matheus Noronha",
+                                modifier = Modifier
+                                    .padding(start = 4.dp, top = 5.dp),
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = ("Estudando: \n" +
+                                        "Matemática e português"),
+                                modifier = Modifier
+                                    .padding(top = 28.dp, start = 6.dp),
+                                fontSize = 11.sp
+                            )
+
+
+                        }
+                        Box(
+                            modifier = Modifier
+                                .background(color = Color.White)
+                                .height(60.dp)
+                                .width(165.dp)
+                        )
+
+                        {
+
+                            Text(
+                                text = (
+                                        "Sub-assunto: "
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 24.dp),
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            Text(
+                                text = ("Soma"),
+                                modifier = Modifier
+                                    .padding(top = 24.dp, start = 60.dp),
+                                fontSize = 10.sp
+                            )
+
+                            Text(
+                                text = (
+                                        "Série:"
+                                        ),
+                                modifier = Modifier
+                                    .padding(top = 34.dp),
+                                fontSize = 10.sp, fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                            )
+
+
+
+                        }
+                    }
+                }
+
             }
         }
         Row (
@@ -701,39 +1397,46 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
             Image(
                 painter = painterResource(id = R.drawable.livro),
                 contentDescription = "livros",
-                modifier = Modifier.size(50.dp)
+                modifier = Modifier
+                    .size(50.dp)
                     .padding(start = 20.dp)
             )
 
             Image(
                 painter = painterResource(id = R.drawable.caderno),
                 contentDescription = "caderno",
-                modifier = Modifier.size(50.dp)
+                modifier = Modifier
+                    .size(50.dp)
                     .padding(start = 20.dp)
             )
             Image(
                 painter = painterResource(id = R.drawable.trofeu),
                 contentDescription = "caderno",
-                modifier = Modifier.size(50.dp)
+                modifier = Modifier
+                    .size(50.dp)
                     .padding(start = 20.dp)
             )
             Image(
                 painter = painterResource(id = R.drawable.duvida),
                 contentDescription = "caderno",
-                modifier = Modifier.size(50.dp)
+                modifier = Modifier
+                    .size(50.dp)
                     .padding(start = 20.dp)
             )
             Image(
                 painter = painterResource(id = R.drawable.sinos),
                 contentDescription = "caderno",
-                modifier = Modifier.size(50.dp)
+                modifier = Modifier
+                    .size(50.dp)
                     .padding(start = 20.dp)
             )
 
             Image(
                 painter = painterResource(id = R.drawable.pontos),
                 contentDescription = "caderno",
-                modifier = Modifier.size(110.dp).padding(start = 80.dp)
+                modifier = Modifier
+                    .size(110.dp)
+                    .padding(start = 80.dp)
 
             )
 
