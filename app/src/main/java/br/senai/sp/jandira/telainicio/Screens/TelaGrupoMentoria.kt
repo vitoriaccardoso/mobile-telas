@@ -53,6 +53,8 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
     var duvidas = remember { mutableStateOf(false) }
     var selectedBox by remember { mutableStateOf(null) }
 
+    var mostrarMenu by remember { mutableStateOf(false) }
+
 
 
 
@@ -1433,13 +1435,45 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
 
             Image(
                 painter = painterResource(id = R.drawable.pontos),
-                contentDescription = "caderno",
+                contentDescription = "pontos",
                 modifier = Modifier
                     .size(110.dp)
                     .padding(start = 80.dp)
 
             )
 
+
+//IconButton(onClick = { mostrarMenu = !mostrarMenu }) {
+//            Icon(Icons.Filled.MoreVert, contentDescription = "Menu")
+//        }
+//
+//        AnimatedVisibility(visible = mostrarMenu) {
+//            Column(
+//                modifier = Modifier
+//                    .background(Color.White) // Personalize o fundo
+//                    .padding(8.dp)
+//            ) {
+//                Image(
+//                    painter = painterResource(id = R.drawable.imagem1),
+//                    contentDescription = "Imagem 1",
+//                    modifier = Modifier.size(50.dp)
+//                )
+//                Spacer(modifier = Modifier.height(8.dp))
+//                Image(
+//                    painter = painterResource(id = R.drawable.imagem2),
+//                    contentDescription = "Imagem 2",
+//                    modifier = Modifier.size(50.dp)
+//                )
+//                Spacer(modifier = Modifier.height(8.dp))
+//                Image(
+//                    painter = painterResource(id = R.drawable.imagem3),
+//                    contentDescription = "Imagem 3",
+//                    modifier = Modifier.size(50.dp)
+//                )
+//            }
+//        }
+//    }
+//}
 
 
         }
