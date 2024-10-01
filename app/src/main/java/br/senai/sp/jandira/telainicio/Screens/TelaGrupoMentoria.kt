@@ -9,9 +9,17 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AlertDialogDefaults.shape
 import androidx.compose.material3.Card
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Label
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -30,6 +38,7 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
@@ -44,6 +53,10 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.telainicio.R
 
+fun DropdownMenuItem(onClick: () -> Unit, interactionSource: @Composable () -> Unit) {
+
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
@@ -53,16 +66,14 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
     var duvidas = remember { mutableStateOf(false) }
     var selectedBox by remember { mutableStateOf(null) }
 
-    var mostrarMenu by remember { mutableStateOf(false) }
+    var barraVisivel by remember { mutableStateOf(false) }
 
 
-
-
-    Column (
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-    ){
+    ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -260,11 +271,11 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                         color = Color(0xFFD9D9D9),
                         shape = RoundedCornerShape(10.dp) // Certifique-se de que a borda também tenha os mesmos cantos arredondados
                     )
-            ){
+            ) {
 
                 Row {
 
-                    Box(modifier = Modifier.size(60.dp)){
+                    Box(modifier = Modifier.size(60.dp)) {
                         Image(
                             painter = painterResource(id = R.drawable.usuario),
                             contentDescription = "usuario",
@@ -275,7 +286,7 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                         )
                     }
                     Spacer(modifier = Modifier.width(10.dp))
-                    Box(){
+                    Box() {
                         Text(
                             text = "Nome do mentor",
                             modifier = Modifier
@@ -330,7 +341,10 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                             modifier = Modifier
                                 .size(90.dp) // Ajuste o tamanho conforme necessário
                                 .align(Alignment.Center)
-                                .padding(bottom = 20.dp, start = 30.dp) // Tente alinhar ao centro para ver se é exibido corretamente
+                                .padding(
+                                    bottom = 20.dp,
+                                    start = 30.dp
+                                ) // Tente alinhar ao centro para ver se é exibido corretamente
                         )
                     }
 
@@ -347,7 +361,11 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                     modifier = Modifier
 //                        .background(Color(0xffFFF28A))
                         .height(46.dp)
-                        .background(if (selectedBox == "membros") Color(0xffFFF28A) else Color(0xfffE9CE03), shape = RoundedCornerShape(10.dp))
+                        .background(
+                            if (selectedBox == "membros") Color(0xffFFF28A) else Color(
+                                0xfffE9CE03
+                            ), shape = RoundedCornerShape(10.dp)
+                        )
                         .width(100.dp)
                         .drawBehind {
                             // Configurações da sombra
@@ -394,13 +412,17 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
 
 
                 ) {
-                    Text(text = "MEMBROS",  fontWeight = FontWeight.ExtraBold)
+                    Text(text = "MEMBROS", fontWeight = FontWeight.ExtraBold)
                 }
 
                 Box(
                     modifier = Modifier
 //                        .background(Color(0xFFFEE101))
-                        .background(if (selectedBox == "Atividades") Color(0xffFFF28A) else Color(0xfffE9CE03), shape = RoundedCornerShape(10.dp))
+                        .background(
+                            if (selectedBox == "Atividades") Color(0xffFFF28A) else Color(
+                                0xfffE9CE03
+                            ), shape = RoundedCornerShape(10.dp)
+                        )
                         .height(46.dp)
                         .width(100.dp)
                         .drawBehind {
@@ -453,7 +475,11 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                 Box(
                     modifier = Modifier
 //                        .background(Color(0xffFFF28A), shape = RoundedCornerShape(10.dp))
-                        .background(if (selectedBox == "Outra") Color(0xffFFF28A) else Color(0xfffE9CE03), shape = RoundedCornerShape(10.dp))
+                        .background(
+                            if (selectedBox == "Outra") Color(0xffFFF28A) else Color(
+                                0xfffE9CE03
+                            ), shape = RoundedCornerShape(10.dp)
+                        )
                         .height(46.dp)
                         .width(100.dp)
                         .drawBehind {
@@ -502,20 +528,20 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
 
 
                 ) {
-                    Text(text = "DUVIDA",  fontWeight = FontWeight.ExtraBold)
+                    Text(text = "DUVIDA", fontWeight = FontWeight.ExtraBold)
                 }
             }
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            Column (
+            Column(
                 modifier = Modifier
                     .background(Color.White)
                     .heightIn(min = 230.dp, max = 315.dp)  // Define a altura mínima
                     .fillMaxWidth()
                     .border(BorderStroke(1.dp, Color(0xffD9D9D9)))
             ) {
-                if(atividades.value == true){
+                if (atividades.value == true) {
 
                     Row(
                         modifier = Modifier
@@ -525,7 +551,7 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                         horizontalArrangement = Arrangement.SpaceEvenly,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Row (
+                        Row(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .width(220.dp)
@@ -540,12 +566,18 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                     // Desenha a sombra com cantos arredondados
                                     drawRoundRect(
                                         color = shadowColor.copy(alpha = 0.8f), // Define a cor e transparência da sombra
-                                        topLeft = Offset(-offsetX, -offsetY), // Desloca a sombra para cima e para os lados
+                                        topLeft = Offset(
+                                            -offsetX,
+                                            -offsetY
+                                        ), // Desloca a sombra para cima e para os lados
                                         size = Size(
                                             size.width + offsetX * 2, // Aumenta a largura da sombra
                                             size.height + offsetY * 2 // Aumenta a altura para cobrir tanto em cima quanto embaixo
                                         ),
-                                        cornerRadius = CornerRadius(cornerRadius, cornerRadius) // Define os cantos arredondados
+                                        cornerRadius = CornerRadius(
+                                            cornerRadius,
+                                            cornerRadius
+                                        ) // Define os cantos arredondados
                                     )
                                 }
                                 .height(40.dp)
@@ -575,7 +607,7 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
 
                     Spacer(modifier = Modifier.height(40.dp))
 
-                    Column (
+                    Column(
                         modifier = Modifier
                             .background(Color(0xfffffffff))
                             .heightIn(min = 100.dp)
@@ -583,17 +615,20 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                         horizontalAlignment = Alignment.CenterHorizontally
 
                     ) {
-                        Row (
+                        Row(
                             horizontalArrangement = Arrangement.Center,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(110.dp)
-                        ){
-                            Column (
+                        ) {
+                            Column(
                                 verticalArrangement = Arrangement.SpaceAround,
                                 modifier = Modifier
                                     .background(Color.White)
-                                    .border(shape = RoundedCornerShape(10.dp), border = BorderStroke(1.dp, Color(0xFFFEE101)))
+                                    .border(
+                                        shape = RoundedCornerShape(10.dp),
+                                        border = BorderStroke(1.dp, Color(0xFFFEE101))
+                                    )
                                     .fillMaxHeight()
                                     .width(150.dp)
 
@@ -607,7 +642,10 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                         // Desenha a sombra sólida com cantos arredondados
                                         drawRoundRect(
                                             color = shadowColor.copy(alpha = 0.8f), // Define a cor e transparência da sombra
-                                            topLeft = Offset(-offsetX, offsetY), // Define o deslocamento da sombra (lateral e para baixo)
+                                            topLeft = Offset(
+                                                -offsetX,
+                                                offsetY
+                                            ), // Define o deslocamento da sombra (lateral e para baixo)
                                             size = Size(
                                                 size.width + offsetX * 2, // Aumenta a largura da sombra
                                                 size.height + offsetY // Aumenta a altura da sombra
@@ -620,7 +658,10 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                     }
                                     .height(60.dp) // Mantém a altura desejada
                                     .width(400.dp) // Mantém a largura desejada
-                                    .background(Color(0xFFFFFFFF), shape = RoundedCornerShape(10.dp)) // Aplica o fundo com bordas arredondadas
+                                    .background(
+                                        Color(0xFFFFFFFF),
+                                        shape = RoundedCornerShape(10.dp)
+                                    ) // Aplica o fundo com bordas arredondadas
                                     .border(
                                         1.dp,
                                         color = Color(0xFFFFFFFF),
@@ -634,14 +675,14 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                     textAlign = TextAlign.Center,
                                     fontSize = 12.sp
                                 )
-                                Row (
+                                Row(
                                     horizontalArrangement = Arrangement.SpaceEvenly,
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                ){
-                                    Column (
+                                ) {
+                                    Column(
                                         horizontalAlignment = Alignment.CenterHorizontally
-                                    ){
+                                    ) {
                                         Image(
                                             painter = painterResource(id = R.drawable.livro),
                                             contentDescription = "Lupa",
@@ -654,9 +695,9 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                             fontSize = 8.sp
                                         )
                                     }
-                                    Column (
+                                    Column(
                                         horizontalAlignment = Alignment.CenterHorizontally
-                                    ){
+                                    ) {
                                         Image(
                                             painter = painterResource(id = R.drawable.pessoas),
                                             contentDescription = "Lupa",
@@ -673,11 +714,14 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                 }
                             }
                             Spacer(modifier = Modifier.width(30.dp))
-                            Column (
+                            Column(
                                 verticalArrangement = Arrangement.SpaceAround,
                                 modifier = Modifier
                                     .background(Color.White)
-                                    .border(shape = RoundedCornerShape(10.dp), border = BorderStroke(1.dp, Color(0xFFFEE101)))
+                                    .border(
+                                        shape = RoundedCornerShape(10.dp),
+                                        border = BorderStroke(1.dp, Color(0xFFFEE101))
+                                    )
                                     .fillMaxHeight()
                                     .width(150.dp)
 
@@ -691,7 +735,10 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                         // Desenha a sombra sólida com cantos arredondados
                                         drawRoundRect(
                                             color = shadowColor.copy(alpha = 0.8f), // Define a cor e transparência da sombra
-                                            topLeft = Offset(-offsetX, offsetY), // Define o deslocamento da sombra (lateral e para baixo)
+                                            topLeft = Offset(
+                                                -offsetX,
+                                                offsetY
+                                            ), // Define o deslocamento da sombra (lateral e para baixo)
                                             size = Size(
                                                 size.width + offsetX * 2, // Aumenta a largura da sombra
                                                 size.height + offsetY // Aumenta a altura da sombra
@@ -704,7 +751,10 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                     }
                                     .height(60.dp) // Mantém a altura desejada
                                     .width(400.dp) // Mantém a largura desejada
-                                    .background(Color(0xFFFFFFFF), shape = RoundedCornerShape(10.dp)) // Aplica o fundo com bordas arredondadas
+                                    .background(
+                                        Color(0xFFFFFFFF),
+                                        shape = RoundedCornerShape(10.dp)
+                                    ) // Aplica o fundo com bordas arredondadas
                                     .border(
                                         1.dp,
                                         color = Color(0xFFFFFFFF),
@@ -718,14 +768,14 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                     textAlign = TextAlign.Center,
                                     fontSize = 12.sp
                                 )
-                                Row (
+                                Row(
                                     horizontalArrangement = Arrangement.SpaceEvenly,
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                ){
-                                    Column (
+                                ) {
+                                    Column(
                                         horizontalAlignment = Alignment.CenterHorizontally
-                                    ){
+                                    ) {
                                         Image(
                                             painter = painterResource(id = R.drawable.livro),
                                             contentDescription = "Lupa",
@@ -738,9 +788,9 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                             fontSize = 8.sp
                                         )
                                     }
-                                    Column (
+                                    Column(
                                         horizontalAlignment = Alignment.CenterHorizontally
-                                    ){
+                                    ) {
                                         Image(
                                             painter = painterResource(id = R.drawable.pessoas),
                                             contentDescription = "Lupa",
@@ -758,17 +808,17 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                             }
                         }
                     }
-                } else if (membros.value == true){
+                } else if (membros.value == true) {
 
-                    Row (
+                    Row(
                         modifier = Modifier
                             .background(Color.White)
                             .height(60.dp)  // Define a altura mínima
                             .fillMaxWidth()
                             .border(BorderStroke(1.dp, Color(0xffD9D9D9)))
 
-                    ){
-                        Box{
+                    ) {
+                        Box {
                             Image(
                                 painter = painterResource(id = R.drawable.usuario),
                                 contentDescription = "usuario",
@@ -779,11 +829,12 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                             )
                         }
                         Spacer(modifier = Modifier.width(20.dp))
-                        Box(modifier = Modifier
-                            .background(Color.White)
-                            .height(80.dp)
-                            .width(165.dp)
-                        ){
+                        Box(
+                            modifier = Modifier
+                                .background(Color.White)
+                                .height(80.dp)
+                                .width(165.dp)
+                        ) {
                             Text(
                                 text = "Matheus Noronha",
                                 modifier = Modifier
@@ -836,12 +887,14 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                 fontSize = 10.sp, fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                                text = "2º fundamental 1",
+                                modifier = Modifier.padding(top = 35.dp, start = 28.dp),
+                                fontSize = 9.sp
                             )
 
 
                         }
-                        Box{
+                        Box {
                             Image(
                                 painter = painterResource(id = R.drawable.usuario),
                                 contentDescription = "usuario",
@@ -852,11 +905,12 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                             )
                         }
                         Spacer(modifier = Modifier.width(20.dp))
-                        Box(modifier = Modifier
-                            .background(Color.White)
-                            .height(80.dp)
-                            .width(165.dp)
-                        ){
+                        Box(
+                            modifier = Modifier
+                                .background(Color.White)
+                                .height(80.dp)
+                                .width(165.dp)
+                        ) {
                             Text(
                                 text = "Matheus Noronha",
                                 modifier = Modifier
@@ -909,23 +963,24 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                 fontSize = 10.sp, fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                                text = "2º fundamental 1",
+                                modifier = Modifier.padding(top = 35.dp, start = 28.dp),
+                                fontSize = 9.sp
                             )
-
 
 
                         }
                     }
 
-                    Row (
+                    Row(
                         modifier = Modifier
                             .background(Color.White)
                             .height(60.dp)  // Define a altura mínima
                             .fillMaxWidth()
                             .border(BorderStroke(1.dp, Color(0xffD9D9D9)))
 
-                    ){
-                        Box{
+                    ) {
+                        Box {
                             Image(
                                 painter = painterResource(id = R.drawable.usuario),
                                 contentDescription = "usuario",
@@ -936,11 +991,12 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                             )
                         }
                         Spacer(modifier = Modifier.width(20.dp))
-                        Box(modifier = Modifier
-                            .background(Color.White)
-                            .height(80.dp)
-                            .width(165.dp)
-                        ){
+                        Box(
+                            modifier = Modifier
+                                .background(Color.White)
+                                .height(80.dp)
+                                .width(165.dp)
+                        ) {
                             Text(
                                 text = "Matheus Noronha",
                                 modifier = Modifier
@@ -993,12 +1049,14 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                 fontSize = 10.sp, fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                                text = "2º fundamental 1",
+                                modifier = Modifier.padding(top = 35.dp, start = 28.dp),
+                                fontSize = 9.sp
                             )
 
 
                         }
-                        Box{
+                        Box {
                             Image(
                                 painter = painterResource(id = R.drawable.usuario),
                                 contentDescription = "usuario",
@@ -1009,11 +1067,12 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                             )
                         }
                         Spacer(modifier = Modifier.width(20.dp))
-                        Box(modifier = Modifier
-                            .background(Color.White)
-                            .height(80.dp)
-                            .width(165.dp)
-                        ){
+                        Box(
+                            modifier = Modifier
+                                .background(Color.White)
+                                .height(80.dp)
+                                .width(165.dp)
+                        ) {
                             Text(
                                 text = "Matheus Noronha",
                                 modifier = Modifier
@@ -1066,22 +1125,23 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                 fontSize = 10.sp, fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                                text = "2º fundamental 1",
+                                modifier = Modifier.padding(top = 35.dp, start = 28.dp),
+                                fontSize = 9.sp
                             )
-
 
 
                         }
                     }
-                    Row (
+                    Row(
                         modifier = Modifier
                             .background(Color.White)
                             .height(60.dp)  // Define a altura mínima
                             .fillMaxWidth()
                             .border(BorderStroke(1.dp, Color(0xffD9D9D9)))
 
-                    ){
-                        Box{
+                    ) {
+                        Box {
                             Image(
                                 painter = painterResource(id = R.drawable.usuario),
                                 contentDescription = "usuario",
@@ -1092,11 +1152,12 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                             )
                         }
                         Spacer(modifier = Modifier.width(20.dp))
-                        Box(modifier = Modifier
-                            .background(Color.White)
-                            .height(80.dp)
-                            .width(165.dp)
-                        ){
+                        Box(
+                            modifier = Modifier
+                                .background(Color.White)
+                                .height(80.dp)
+                                .width(165.dp)
+                        ) {
                             Text(
                                 text = "Matheus Noronha",
                                 modifier = Modifier
@@ -1149,12 +1210,14 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                 fontSize = 10.sp, fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                                text = "2º fundamental 1",
+                                modifier = Modifier.padding(top = 35.dp, start = 28.dp),
+                                fontSize = 9.sp
                             )
 
 
                         }
-                        Box{
+                        Box {
                             Image(
                                 painter = painterResource(id = R.drawable.usuario),
                                 contentDescription = "usuario",
@@ -1165,11 +1228,12 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                             )
                         }
                         Spacer(modifier = Modifier.width(20.dp))
-                        Box(modifier = Modifier
-                            .background(Color.White)
-                            .height(80.dp)
-                            .width(165.dp)
-                        ){
+                        Box(
+                            modifier = Modifier
+                                .background(Color.White)
+                                .height(80.dp)
+                                .width(165.dp)
+                        ) {
                             Text(
                                 text = "Matheus Noronha",
                                 modifier = Modifier
@@ -1222,22 +1286,23 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                 fontSize = 10.sp, fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                                text = "2º fundamental 1",
+                                modifier = Modifier.padding(top = 35.dp, start = 28.dp),
+                                fontSize = 9.sp
                             )
-
 
 
                         }
                     }
-                    Row (
+                    Row(
                         modifier = Modifier
                             .background(Color(0xffD9D9D9))
                             .height(60.dp)  // Define a altura mínima
                             .fillMaxWidth()
 
 
-                    ){
-                        Box{
+                    ) {
+                        Box {
                             Image(
                                 painter = painterResource(id = R.drawable.usuario),
                                 contentDescription = "usuario",
@@ -1248,11 +1313,12 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                             )
                         }
                         Spacer(modifier = Modifier.width(20.dp))
-                        Box(modifier = Modifier
-                            .background(Color(0xffD9D9D9))
-                            .height(80.dp)
-                            .width(165.dp)
-                        ){
+                        Box(
+                            modifier = Modifier
+                                .background(Color(0xffD9D9D9))
+                                .height(80.dp)
+                                .width(165.dp)
+                        ) {
                             Text(
                                 text = "Matheus Noronha",
                                 modifier = Modifier
@@ -1305,12 +1371,14 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                 fontSize = 10.sp, fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                                text = "2º fundamental 1",
+                                modifier = Modifier.padding(top = 35.dp, start = 28.dp),
+                                fontSize = 9.sp
                             )
 
 
                         }
-                        Box{
+                        Box {
                             Image(
                                 painter = painterResource(id = R.drawable.usuario),
                                 contentDescription = "usuario",
@@ -1321,11 +1389,12 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                             )
                         }
                         Spacer(modifier = Modifier.width(20.dp))
-                        Box(modifier = Modifier
-                            .background(Color.White)
-                            .height(80.dp)
-                            .width(165.dp)
-                        ){
+                        Box(
+                            modifier = Modifier
+                                .background(Color.White)
+                                .height(80.dp)
+                                .width(165.dp)
+                        ) {
                             Text(
                                 text = "Matheus Noronha",
                                 modifier = Modifier
@@ -1378,9 +1447,10 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                                 fontSize = 10.sp, fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "2º fundamental 1", modifier = Modifier.padding(top = 35.dp, start = 28.dp),fontSize = 9.sp
+                                text = "2º fundamental 1",
+                                modifier = Modifier.padding(top = 35.dp, start = 28.dp),
+                                fontSize = 9.sp
                             )
-
 
 
                         }
@@ -1389,13 +1459,13 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
 
             }
         }
-        Row (
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(70.dp)
                 .background(Color(0xff302F2F))
 
-        ){
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.livro),
                 contentDescription = "livros",
@@ -1439,52 +1509,34 @@ fun TelaGrupoMentoria(controleDeNavegacao: NavHostController? = null) {
                 modifier = Modifier
                     .size(110.dp)
                     .padding(start = 80.dp)
-
+                    .clickable {
+                        barraVisivel = !barraVisivel // Alterna a visibilidade da barra ao clicar
+                    }
             )
 
+            // Se a barra estiver visível, exibe uma barra vertical com ícones
+            if (barraVisivel) {
+                Spacer(modifier = Modifier.width(16.dp)) // Espaçamento entre a imagem e a barra
 
-//IconButton(onClick = { mostrarMenu = !mostrarMenu }) {
-//            Icon(Icons.Filled.MoreVert, contentDescription = "Menu")
-//        }
-//
-//        AnimatedVisibility(visible = mostrarMenu) {
-//            Column(
-//                modifier = Modifier
-//                    .background(Color.White) // Personalize o fundo
-//                    .padding(8.dp)
-//            ) {
-//                Image(
-//                    painter = painterResource(id = R.drawable.imagem1),
-//                    contentDescription = "Imagem 1",
-//                    modifier = Modifier.size(50.dp)
-//                )
-//                Spacer(modifier = Modifier.height(8.dp))
-//                Image(
-//                    painter = painterResource(id = R.drawable.imagem2),
-//                    contentDescription = "Imagem 2",
-//                    modifier = Modifier.size(50.dp)
-//                )
-//                Spacer(modifier = Modifier.height(8.dp))
-//                Image(
-//                    painter = painterResource(id = R.drawable.imagem3),
-//                    contentDescription = "Imagem 3",
-//                    modifier = Modifier.size(50.dp)
-//                )
-//            }
-//        }
-//    }
-//}
+                // Barra de navegação vertical com ícones
+                Column(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(56.dp)
+                        .background(Color.LightGray),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
 
-
+                }
+            }
         }
     }
-    }
+        }
 
 
 
-
-
-@Preview(showBackground = true, showSystemUi = false)
+        @Preview(showBackground = true, showSystemUi = false)
 @Composable
 fun TelaGrupoMentoriaPreview() {
     TelaGrupoMentoria()
