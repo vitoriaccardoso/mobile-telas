@@ -7,17 +7,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.Email
+
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,10 +23,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -89,9 +84,9 @@ fun TelaChatIA(modifier: Modifier = Modifier) {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
-                .height(40.dp)
+                .height(80.dp)
                 .background(Color(0xff302F2F))
-                .padding(horizontal = 25.dp).padding(top = 10.dp)
+                .padding(horizontal = 25.dp)
         ) {
             OutlinedTextField(
                 trailingIcon = {
@@ -115,65 +110,71 @@ fun TelaChatIA(modifier: Modifier = Modifier) {
                 placeholder = {
                     Text(
                         text = "Escreva uma mensagem",
-                        color = Color.Black,
-                        fontSize = 12.sp, modifier = Modifier.padding(bottom = 100.dp)
+                        color = Color.White,
+                        fontSize = 12.sp
                     )
                 }
             )
         }
+        Column (
+            verticalArrangement = Arrangement.Bottom,
+            modifier = Modifier.fillMaxHeight().padding(bottom = 80.dp),
+        ){
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(70.dp)
-                .background(Color(0xff302F2F)).padding(top = 10.dp)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(70.dp)
+                    .background(Color(0xff302F2F)).padding(top = 10.dp)
 
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.livro),
-                contentDescription = "livros",
-                modifier = Modifier
-                    .size(50.dp)
-                    .padding(start = 20.dp)
-            )
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.livro),
+                    contentDescription = "livros",
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(start = 20.dp)
+                )
 
-            Image(
-                painter = painterResource(id = R.drawable.caderno),
-                contentDescription = "caderno",
-                modifier = Modifier
-                    .size(50.dp)
-                    .padding(start = 20.dp)
-            )
-            Image(
-                painter = painterResource(id = R.drawable.trofeu),
-                contentDescription = "caderno",
-                modifier = Modifier
-                    .size(50.dp)
-                    .padding(start = 20.dp)
-            )
-            Image(
-                painter = painterResource(id = R.drawable.duvida),
-                contentDescription = "caderno",
-                modifier = Modifier
-                    .size(50.dp)
-                    .padding(start = 20.dp)
-            )
-            Image(
-                painter = painterResource(id = R.drawable.sinos),
-                contentDescription = "caderno",
-                modifier = Modifier
-                    .size(50.dp)
-                    .padding(start = 20.dp)
-            )
+                Image(
+                    painter = painterResource(id = R.drawable.caderno),
+                    contentDescription = "caderno",
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(start = 20.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.trofeu),
+                    contentDescription = "caderno",
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(start = 20.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.duvida),
+                    contentDescription = "caderno",
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(start = 20.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.sinos),
+                    contentDescription = "caderno",
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(start = 20.dp)
+                )
 
-            Image(
-                painter = painterResource(id = R.drawable.pontos),
-                contentDescription = "pontos",
-                modifier = Modifier
-                    .size(100.dp)
-                    .padding(start = 70.dp, bottom = 16.dp)
-            )
+                Image(
+                    painter = painterResource(id = R.drawable.pontos),
+                    contentDescription = "pontos",
+                    modifier = Modifier
+                        .size(100.dp)
+                        .height(100.dp).padding(start = 60.dp)
 
+                )
+
+            }
         }
     }
 }
