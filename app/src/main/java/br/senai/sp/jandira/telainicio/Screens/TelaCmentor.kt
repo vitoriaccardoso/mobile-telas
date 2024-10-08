@@ -2,11 +2,11 @@ package br.senai.sp.jandira.telainicio.Screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
-
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -23,7 +22,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,9 +34,7 @@ import br.senai.sp.jandira.telainicio.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 
-
-fun TelaChatIA(modifier: Modifier = Modifier) {
-
+fun telaChatCMentor(modifier: Modifier = Modifier) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -52,7 +48,7 @@ fun TelaChatIA(modifier: Modifier = Modifier) {
                 .fillMaxWidth() // Preenche a largura da tela
         ) {
             Text(
-                "ChatIA",
+                "Chat",
                 modifier = Modifier
                     .align(alignment = Alignment.CenterHorizontally)
                     .padding(top = 20.dp),
@@ -60,25 +56,28 @@ fun TelaChatIA(modifier: Modifier = Modifier) {
                 color = Color.White
             )
         }
+
+        Spacer(modifier = Modifier.height(100.dp))
+
         Column(
             modifier = Modifier
                 .background(Color(0xff302F2F))
-                .height(570.dp)
+                .height(450.dp)
         ) {
             Image(
                 modifier = Modifier
-                    .size(300.dp).padding(top = 150.dp)
+                    .size(100.dp)
+//                    .padding(top = 150.dp)
                     .align(alignment = Alignment.CenterHorizontally),
-                painter = painterResource(id = R.drawable.calabreso2),
+                painter = painterResource(id = R.drawable.icon),
                 contentDescription = "Calabreso"
             )
             Text(
-                "Converse com nosso\n" +
-                        "calabreso para " +
-                        "tirar dúvidas superficiais", modifier = Modifier
+                "Matheus aceitou seu pedido de ajuda, mande mensagem para começar a conversa",
+                modifier = Modifier
                     .padding(start = 80.dp),
                 color = Color.White,
-                fontSize = 20.sp
+                fontSize = 15.sp
             )
         }
         Box(
@@ -100,7 +99,9 @@ fun TelaChatIA(modifier: Modifier = Modifier) {
                 },
                 value = "",
                 onValueChange = {},
-                modifier = Modifier.fillMaxWidth().height(50.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
                 shape = RoundedCornerShape(20.dp),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     containerColor = Color(0xFF666260),
@@ -118,14 +119,17 @@ fun TelaChatIA(modifier: Modifier = Modifier) {
         }
         Column (
             verticalArrangement = Arrangement.Bottom,
-            modifier = Modifier.fillMaxHeight().padding(bottom = 80.dp),
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(bottom = 80.dp),
         ){
 
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(70.dp)
-                    .background(Color(0xff302F2F)).padding(top = 10.dp)
+                    .background(Color(0xff302F2F))
+                    .padding(top = 10.dp)
 
             ) {
                 Image(
@@ -170,7 +174,8 @@ fun TelaChatIA(modifier: Modifier = Modifier) {
                     contentDescription = "pontos",
                     modifier = Modifier
                         .size(100.dp)
-                        .height(100.dp).padding(start = 60.dp)
+                        .height(100.dp)
+                        .padding(start = 60.dp)
 
                 )
 
@@ -179,8 +184,8 @@ fun TelaChatIA(modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(showSystemUi = true, showBackground = true)
 @Composable
-fun TelaChatIAPreview() {
- TelaChatIA()
+private fun telaChatCmentorPreview() {
+    telaChatCMentor()
 }
