@@ -295,7 +295,7 @@ fun TelaChatConversa(modifier: Modifier = Modifier) {
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 containerColor = Color(0xFF666260),
                 focusedBorderColor = Color(0xFF666260),
-                unfocusedBorderColor = Color(0xFF666260),
+                unfocusedBorderColor = Color(0xFF666260)
             ),
             placeholder = {
                 Text(
@@ -307,6 +307,7 @@ fun TelaChatConversa(modifier: Modifier = Modifier) {
         )
     }
 }
+
 
 
 @Preview(showBackground = true, showSystemUi = true)

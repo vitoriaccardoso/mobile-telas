@@ -69,7 +69,7 @@ fun telaChatCMentor(modifier: Modifier = Modifier) {
                     .size(100.dp)
 //                    .padding(top = 150.dp)
                     .align(alignment = Alignment.CenterHorizontally),
-                painter = painterResource(id = R.drawable.icon),
+                painter = painterResource(id = R.drawable.usuario),
                 contentDescription = "Calabreso"
             )
             Text(
