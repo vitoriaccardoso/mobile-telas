@@ -10,13 +10,18 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -33,14 +38,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import br.senai.sp.jandira.telainicio.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatConversa(modifier: Modifier = Modifier) {
+fun ChatAvaliacao(modifier: Modifier = Modifier) {
 
     var textoMensagem by remember { mutableStateOf("") }
 
@@ -312,11 +320,66 @@ fun ChatConversa(modifier: Modifier = Modifier) {
                 }
             )
         }
+
+        // Box que ficará acima da Column
+        Box(
+            modifier = Modifier
+                .offset(x = 50.dp, y = 100.dp)
+                .background(Color.White)
+                .height(400.dp)
+                .width(300.dp)
+                .zIndex(1f) // Ajuste o zIndex se necessário
+                .padding(36.dp)
+        ) {
+           Column(
+               horizontalAlignment = Alignment.CenterHorizontally,
+               modifier = Modifier
+                   .fillMaxSize()
+               ) {
+               Image(
+                   painter = painterResource(R.drawable.mascote),
+                   contentDescription = "calabreso",
+                   modifier = Modifier
+                       .size(90.dp)
+               )
+               Text(
+                   text = "Olá! \n" +
+                       "Nós da equipe StudyFy queremos saber como você avaliou essa ajuda!",
+                   fontSize = 15.sp,
+                   textAlign = TextAlign.Center,
+                   fontWeight = FontWeight.Bold
+               )
+               Image(
+                   painter = painterResource(R.drawable.estrelas),
+                   contentDescription = "sla",
+                   modifier = Modifier
+                       .height(50.dp)
+                       .width(100.dp)
+               )
+               Button(
+                   onClick = { /* */ },
+                   modifier = Modifier
+                       .height(55.dp)
+                       .width(300.dp)
+                       .padding(8.dp),
+                   colors = ButtonDefaults.buttonColors(Color(0xFFFE9CE03))
+               ) {
+                   Text(
+                       text = "Enviar",
+                       color = Color.Black,
+                       textAlign = TextAlign.Center,
+                       fontSize = 20.sp,
+                       modifier = Modifier.fillMaxWidth()
+                   )
+               }
+
+           }
+        }
     }
 }
 
 @Preview(showBackground = true, showSystemUi =  true)
 @Composable
-private fun ChatConversaPreview() {
-    ChatConversa()
+private fun ChatAvaliacaoPreview() {
+    ChatAvaliacao()
 }
