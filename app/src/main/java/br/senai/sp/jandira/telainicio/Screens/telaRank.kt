@@ -31,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.senai.sp.jandira.telainicio.R
+import br.senai.sp.jandira.telainicio.ui.theme.poppinsFontFamily
 
 
 @Composable
@@ -195,7 +196,9 @@ fun TelaRankeamento(modifier: Modifier = Modifier) {
                             Text(
                                 text = "#6",
                                 textAlign = TextAlign.Center,
-                                fontWeight = FontWeight.Bold,
+                                fontFamily = poppinsFontFamily,
+                                fontWeight = FontWeight.Thin
+
                             )
                         }
                         Row(horizontalArrangement = Arrangement.spacedBy(20.dp),
