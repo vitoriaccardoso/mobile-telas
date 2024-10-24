@@ -2,15 +2,19 @@ package br.senai.sp.jandira.telainicio.Screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
@@ -25,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import br.senai.sp.jandira.telainicio.R
 import br.senai.sp.jandira.telainicio.ui.theme.poppinsFontFamily
 
@@ -35,20 +40,43 @@ fun RankDesceu(modifier: Modifier = Modifier) {
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-
-        Image(painter = painterResource(R.drawable.calabresobravo),
-            contentDescription = "calabreso triste",
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .size(130.dp)
-        )
+                .fillMaxWidth()
+                .height(150.dp)
+        ) {
+            Spacer(modifier = Modifier.weight(1f))
 
-        Box(modifier = Modifier
-            .height(11.dp)
-            .width(200.dp)
-            .background(color = (Color(0xFFFCDA572))),
-        ){
 
+            Image(
+                painter = painterResource(R.drawable.calabresobravo),
+                contentDescription = "calabreso triste",
+                modifier = Modifier.size(130.dp)
+                    .offset(y = 20.dp)
+                    .zIndex(100F)
+            )
+
+
+            Box(
+                modifier = Modifier
+                    .height(11.dp)
+                    .width(280.dp)
+                    .background(
+                        color = Color(0xFFFCDA572),
+                        shape = RoundedCornerShape(
+                            topStart = 0.dp,
+                            topEnd = 20.dp,
+                            bottomStart = 0.dp,
+                            bottomEnd = 20.dp
+                        )
+                    )
+                    .align(Alignment.Start)
+            ) {
+
+            }
         }
+
 
         Spacer(modifier = Modifier.size(50.dp))
 
@@ -86,7 +114,7 @@ fun RankDesceu(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(30.dp))
 
         Button(
-            onClick = { /* Ação a ser executada ao clicar no botão */ },
+            onClick = { /**/ },
             modifier = Modifier
                 .width(172.dp)
                 .height(41.dp),
@@ -95,14 +123,24 @@ fun RankDesceu(modifier: Modifier = Modifier) {
             Text("Voltar")
         }
         Spacer(modifier = Modifier.height(100.dp))
-
-        Box(modifier = Modifier
-            .height(11.dp)
-            .width(200.dp)
-            .background(color = (Color(0xFFFCDA572))),
-        ){
+        Box(
+            modifier = Modifier
+                .height(11.dp)
+                .width(280.dp)
+                .background(
+                    color = Color(0xFFFCDA572),
+                    shape = RoundedCornerShape(
+                        topStart = 20.dp,
+                        topEnd = 0.dp,
+                        bottomStart = 20.dp,
+                        bottomEnd = 0.dp
+                    )
+                )
+                .align(Alignment.End)
+        ) {
 
         }
+
     }
 }
 
