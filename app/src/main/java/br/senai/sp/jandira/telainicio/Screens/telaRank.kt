@@ -68,11 +68,13 @@ fun TelaRankeamento(modifier: Modifier = Modifier) {
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold
                 )
+
             Box(
                 modifier = Modifier
                     .height(11.dp)
                     .width(160.dp)
-                    .background(Color(0xFFFE9CE03))
+                    .background(Color(0xFFFE9CE03),
+                        shape = RoundedCornerShape(10.dp))
                     .clip(RoundedCornerShape(10.dp))
 
             )
@@ -429,7 +431,9 @@ fun TelaRankeamento(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .height(11.dp)
                     .width(200.dp)
-                    .background(Color(0xFFFE9CE03))
+                    .background(Color(0xFFFE9CE03),
+                        shape = RoundedCornerShape(10.dp)
+                    )
                     .clip(RoundedCornerShape(10.dp))
 
             )
