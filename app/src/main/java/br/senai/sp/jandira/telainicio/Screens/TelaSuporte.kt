@@ -23,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import br.senai.sp.jandira.telainicio.R
 import br.senai.sp.jandira.telainicio.ui.theme.poppinsFontFamily
 
@@ -30,21 +31,15 @@ import br.senai.sp.jandira.telainicio.ui.theme.poppinsFontFamily
 fun Suporte(modifier: Modifier = Modifier) {
 
     Column(modifier = Modifier
-        .fillMaxSize(),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+        ) {
         Spacer(modifier = Modifier.height(20.dp))
 
         Row {
             Text(text = "Central de ajuda",
                 fontFamily = poppinsFontFamily,
                 fontWeight = FontWeight.Medium
-            )
-
-            Image(painter = painterResource(R.drawable.configuracao),
-                contentDescription = "configuração",
-                modifier = Modifier
-                    .size(20.dp)
             )
         }
 
@@ -115,14 +110,21 @@ fun Suporte(modifier: Modifier = Modifier) {
             onClick = { /**/ },
             modifier = Modifier
                 .width(151.dp)
-                .height(49.dp)
+                .height(49.dp),
+            colors = ButtonDefaults.buttonColors( containerColor =  Color(0xFFFD9D9D9)),
+            shape = RoundedCornerShape(15.dp)
         ) {
             Row {
                 Image(painter = painterResource(R.drawable.faleconosco),
                     contentDescription = "fale conosco",
-                    colors = ButtonDefaults.buttonColors( containerColor =  Color(0xFFFFFD700))
+                    modifier = Modifier
+                        .size(20.dp)
                     )
-                Text("Fale conosco")
+                Text("Fale conosco",
+                    fontSize = 10.sp,
+                    fontFamily = poppinsFontFamily,
+                    color = Color.Black,
+                    )
             }
 
         }
