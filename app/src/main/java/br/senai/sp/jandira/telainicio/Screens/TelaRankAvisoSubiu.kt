@@ -2,7 +2,6 @@ package br.senai.sp.jandira.telainicio.Screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,13 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,7 +30,7 @@ import br.senai.sp.jandira.telainicio.R
 import br.senai.sp.jandira.telainicio.ui.theme.poppinsFontFamily
 
 @Composable
-fun RankDesceu(modifier: Modifier = Modifier) {
+fun RankSubiu(modifier: Modifier = Modifier) {
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -50,7 +46,7 @@ fun RankDesceu(modifier: Modifier = Modifier) {
 
 
             Image(
-                painter = painterResource(R.drawable.calabresobravo),
+                painter = painterResource(R.drawable.calabresofeliz),
                 contentDescription = "calabreso triste",
                 modifier = Modifier.size(130.dp)
                     .offset(y = 20.dp)
@@ -63,7 +59,7 @@ fun RankDesceu(modifier: Modifier = Modifier) {
                     .height(11.dp)
                     .width(280.dp)
                     .background(
-                        color = Color(0xFFFCDA572),
+                        color = Color(0xFFF9DA0B3),
                         shape = RoundedCornerShape(
                             topStart = 0.dp,
                             topEnd = 20.dp,
@@ -81,7 +77,7 @@ fun RankDesceu(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.size(50.dp))
 
         Text(
-            text = "Que pena !!!",
+            text = "Parabéns !!!",
             fontFamily = poppinsFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 30.sp
@@ -90,7 +86,7 @@ fun RankDesceu(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(20.dp))
 
         Box(){
-            Image(painter = painterResource(R.drawable.bronzei),
+            Image(painter = painterResource(R.drawable.prataii),
                 contentDescription = "calabreso triste",
                 modifier = Modifier
                     .size(100.dp)
@@ -102,7 +98,7 @@ fun RankDesceu(modifier: Modifier = Modifier) {
         Box(modifier = Modifier.width(192.dp)
         ){
             Text(
-                text = "Você caiu para o rank bronze I",
+                text = "Você subiu para o rank prata II ",
                 fontFamily = poppinsFontFamily,
                 fontWeight = FontWeight.Medium,
                 fontSize = 15.sp,
@@ -127,15 +123,13 @@ fun RankDesceu(modifier: Modifier = Modifier) {
                 fontSize = 20.sp
             )
         }
-
         Spacer(modifier = Modifier.height(100.dp))
-
         Box(
             modifier = Modifier
                 .height(11.dp)
                 .width(280.dp)
                 .background(
-                    color = Color(0xFFFCDA572),
+                    color = Color(0xFFF9DA0B3),
                     shape = RoundedCornerShape(
                         topStart = 20.dp,
                         topEnd = 0.dp,
@@ -153,6 +147,6 @@ fun RankDesceu(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-private fun RankDesceuPreview() {
-    RankDesceu()
+private fun RankSubiuPreview() {
+    RankSubiu()
 }
